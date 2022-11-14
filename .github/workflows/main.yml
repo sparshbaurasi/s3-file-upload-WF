@@ -10,16 +10,19 @@ on:
          - s3-composite-file-upload-action
       KEY_NAME:
         type: string
-      FILE_NAME:
-        type: string
-        required: true
+#       FILE_NAME:
+#         type: string
+#         required: true
 #     secrets:
 #       AWS_ACCESS_KEY:
 #         required: true
 #       AWS_SECRET_ACCESS_KEY:
 #         required: true
 jobs:
-  build-test:
+  build:
+    strategy:
+      matrix:
+        folders: [tests,envs]
     runs-on: ubuntu-20.04
     steps: 
       - name: Checkout
@@ -35,4 +38,4 @@ jobs:
         with:
           BUCKET_NAME: ${{ github.event.inputs.BUCKET_NAME }}
           KEY_NAME: ${{ github.event.inputs.KEY_NAME }}
-          FILE_NAME: ${{ github.event.inputs.FILE_NAME }}
+          FILE_NAME: ${{ matrix.folders }}
