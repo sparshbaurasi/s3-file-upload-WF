@@ -2,7 +2,8 @@ name: Reusable workflow
 
 on:
   push:
-   if ${{ branches: main }}
+     branches:
+       - main
   workflow_dispatch:
     inputs:
       BUCKET_NAME:
