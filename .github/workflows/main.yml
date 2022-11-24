@@ -1,6 +1,8 @@
 name: Reusable workflow
 
 on:
+  push:
+   if ${{ branches: main }}
   workflow_dispatch:
     inputs:
       BUCKET_NAME:
@@ -8,16 +10,9 @@ on:
         required: true
         options:
          - s3-composite-file-upload-action
+        default: s3-composite-file-upload-action
       KEY_NAME:
         type: string
-#       FILE_NAME:
-#         type: string
-#         required: true
-#     secrets:
-#       AWS_ACCESS_KEY:
-#         required: true
-#       AWS_SECRET_ACCESS_KEY:
-#         required: true
 permissions:
   id-token: write # This is required for requesting the JWT
   contents: read  # This is required for actions/checkout
