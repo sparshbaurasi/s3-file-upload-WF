@@ -29,7 +29,7 @@ jobs:
       - name: Configure AWS Creds
         uses: aws-actions/configure-aws-credentials@v1
         with:
-          role-to-assume: arn:aws:iam::612490972332:role/Idp-role-for-github
+          role-to-assume: arn:aws:iam::612490972332:role/github-idp
           role-session-name: Idp-role-for-github
           aws-region: ap-south-1
       - name: Copy to s3
