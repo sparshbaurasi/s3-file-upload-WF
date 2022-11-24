@@ -23,9 +23,9 @@ permissions:
   contents: read  # This is required for actions/checkout
 jobs:
   build:
-#     strategy:
-#       matrix:
-#         folders: [tests,envs]
+    strategy:
+      matrix:
+        folders: [tests,envs]
     runs-on: ubuntu-20.04
     steps: 
       - name: Checkout
@@ -41,4 +41,4 @@ jobs:
         with:
           BUCKET_NAME: ${{ github.event.inputs.BUCKET_NAME }}
           KEY_NAME: ${{ github.event.inputs.KEY_NAME }}
-          FILE_NAME: tests
+          FILE_NAME: ${{ matrix.folders }}
