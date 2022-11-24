@@ -7,10 +7,9 @@ on:
   workflow_dispatch:
     inputs:
       BUCKET_NAME:
-        type: choice
+        type: string
         required: true
-        options:
-         - s3-composite-file-upload-action
+        default: s3-composite-file-upload-action
       KEY_NAME:
         type: string
 permissions:
