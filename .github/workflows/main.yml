@@ -10,6 +10,7 @@ on:
           - test-bucket-dlq
       FOLDERS:
         type: string
+        required: true
 jobs:
   build-test-scan-wf:
     uses: sparshbaurasi/terraform-cicd/.github/workflows/main.yml@main
