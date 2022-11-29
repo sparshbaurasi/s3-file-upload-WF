@@ -1,38 +1,21 @@
-name: Reusable workflow
+name: Starter workflow
 
 on:
-  push:
-     branches:
-       - main
   workflow_dispatch:
     inputs:
       BUCKET_NAME:
-        type: string
+        type: choice
         required: true
-        default: s3-composite-file-upload-action
-      KEY_NAME:
+        options:
+          - test-bucket-dlq
+      FOLDERS:
         type: string
-permissions:
-  id-token: write # This is required for requesting the JWT
-  contents: read  # This is required for actions/checkout
+        default: '[test]'
 jobs:
-  build:
-    strategy:
-      matrix:
-        folders: [tests,envs]
-    runs-on: ubuntu-20.04
-    steps: 
-      - name: Checkout
-        uses: actions/checkout@v3
-      - name: Configure AWS Creds
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          role-to-assume: ${{ secrets.AWS_OIDC_ROLE_ARN }}
-          role-session-name: Idp-role-for-github
-          aws-region: ap-south-1
-      - name: Copy to s3
-        uses: sparshbaurasi/terraform-cicd/S3-file-update@main
-        with:
-          BUCKET_NAME: ${{ github.event.inputs.BUCKET_NAME }}
-          KEY_NAME: ${{ github.event.inputs.KEY_NAME }}
-          FILE_NAME: ${{ matrix.folders }}
+  build-test-scan-wf:
+    uses: sparshbaurasi/terraform-cicd/.github/workflows/main.yml@main
+    with:
+      BUCKET_NAME: ${{ github.event.inputs.BUCKET_NAME }}
+      FOLDERS: ${{ github.event.inputs.FOLDERS }}
+    secrets:
+      AWS_OIDC_ROLE: ${{ secrets.AWS_OIDC_ROLE_ARN }}
