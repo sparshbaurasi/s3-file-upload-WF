@@ -9,8 +9,8 @@ on:
         options:
           - test-bucket-dlq
       FOLDERS:
-        type: string
-        default: '[test]'
+#         type: string
+        default: [test]
 jobs:
   build-test-scan-wf:
     uses: sparshbaurasi/terraform-cicd/.github/workflows/main.yml@main
