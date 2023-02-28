@@ -13,12 +13,12 @@ on:
         required: true
 jobs:
   build-test-scan-wf:
-#     strategy:
-#       matrix:
-#         folders: ['envs', 'tests']
-    uses: sparshbaurasi/terraform-cicd/.github/workflows/main.yml@main
-    with:
-      BUCKET_NAME: ${{ github.event.inputs.BUCKET_NAME }}
-      FOLDERS: ${{ github.event.inputs.FOLDERS }}
-    secrets:
-      AWS_OIDC_ROLE: ${{ secrets.AWS_OIDC_ROLE_ARN }}
+    strategy:
+      matrix:
+        folders: ['envs', 'tests']
+      uses: sparshbaurasi/terraform-cicd/.github/workflows/main.yml@main
+      with:
+        BUCKET_NAME: ${{ github.event.inputs.BUCKET_NAME }}
+        FOLDERS: ${{ github.event.inputs.FOLDERS }}
+      secrets:
+        AWS_OIDC_ROLE: ${{ secrets.AWS_OIDC_ROLE_ARN }}
