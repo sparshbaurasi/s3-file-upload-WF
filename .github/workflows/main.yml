@@ -13,7 +13,7 @@ on:
       #   required: true
 jobs:
   build-test-scan-wf:
-   strategy:
+    strategy:
       matrix:
         folders: ['envs', 'tests']
     uses: sparshbaurasi/terraform-cicd/.github/workflows/main.yml@main
