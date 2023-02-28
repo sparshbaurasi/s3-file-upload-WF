@@ -7,15 +7,18 @@ on:
         type: choice
         required: true
         options:
-          - test-bucket-dlq
-      FOLDERS:
-        type: string
-        required: true
+          - sadljd123
+#       FOLDERS:
+#         type: string
+#         required: true
 jobs:
   build-test-scan-wf:
+    strategy:
+      matrix:
+        folders: ['envs','tests']
     uses: sparshbaurasi/terraform-cicd/.github/workflows/main.yml@main
     with:
       BUCKET_NAME: ${{ github.event.inputs.BUCKET_NAME }}
-      FOLDERS: ${{ github.event.inputs.FOLDERS }}
+      FOLDERS: ${{ matrix.FOLDERS }}
     secrets:
       AWS_OIDC_ROLE: ${{ secrets.AWS_OIDC_ROLE_ARN }}
