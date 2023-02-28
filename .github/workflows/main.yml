@@ -8,9 +8,9 @@ on:
         required: true
         options:
           - sadljd123
-      FOLDERS:
-        type: string
-        required: true
+      # FOLDERS:
+      #   type: string
+      #   required: true
 jobs:
   build-test-scan-wf:
    strategy:
