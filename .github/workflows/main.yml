@@ -8,17 +8,19 @@ on:
         required: true
         options:
           - sadljd123
-      # FOLDERS:
-      #   type: string
-      #   required: true
+      FOLDERS:
+        type: string
+        required: true
 jobs:
   build-test-scan-wf:
-    strategy:
-      matrix:
-        folders: ['envs', 'tests']
+#     strategy:
+#       matrix:
+#         folders: ['envs', 'tests']
     uses: sparshbaurasi/terraform-cicd/.github/workflows/main.yml@main
     with:
       BUCKET_NAME: ${{ github.event.inputs.BUCKET_NAME }}
-      FOLDERS: ${{ matrix.folders}}
+      FOLDERS: ${{ github.event.inputs.FOLDERS }}
     secrets:
       AWS_OIDC_ROLE: ${{ secrets.AWS_OIDC_ROLE_ARN }}
+      SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+      SLACK_CHANNEL: ${{ secrets.SLACK_CHANNEL }}
